@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package com.khoi.orderproto;
+
+option java_multiple_files = true;
+
+
+message CreateOrderRequest {
+  int32 customer_id = 1;
+  string address = 2;
+  repeated CheckoutDataProto checkoutDataProto = 3;
+}
+message CreateOrderResponse {
+  int32 order_id = 1;
+}
+message CheckoutDataProto {
+  int32 product_id = 1;
+  int32 amount = 2;
+}
+message GetOrdersRequest {
+  int32 customer_id = 1;
+}
+message GetOrdersResponse {
+  int32 order_id = 1;
+  int64 order_number = 2;
+  int32 total_price = 3;
+  string created_at = 4;
+  string address = 5;
+  int32 status = 6;
+}
+message TrackingOrderDetailsRequest {
+  int32 order_id = 1;
+  int32 customer_id = 2;
+  string role = 3;
+}
+message OrderItem {
+  string product_name = 1;
+  int32 price = 2;
+  int32 amount = 3;
+  string supplier_name = 4;
+  int32 total_order_item = 5;
+}
+message TrackingOrderDetailsResponse {
+  GetOrdersResponse order = 1;
+  repeated OrderItem orderItem = 2;
+}
+service OrderService {
+  rpc createOrder (CreateOrderRequest) returns (CreateOrderResponse);
+  rpc getOrders (GetOrdersRequest) returns (stream GetOrdersResponse);
+  rpc trackingOrderDetails (TrackingOrderDetailsRequest) returns (TrackingOrderDetailsResponse);
+}

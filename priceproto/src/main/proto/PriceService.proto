@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package com.khoi.proto;
+
+option java_multiple_files = true;
+
+message GetPriceHistoryRequest {
+  int32 product_id = 1;
+}
+message GetPriceRequest {
+  int32 product_id = 1;
+}
+message DeleteRequest {
+  int32 product_id = 1;
+}
+
+message PriceEntry {
+  int32 id = 1;
+  int32 product_id = 2;
+  int32 price = 3;
+  string createdTime = 4;
+  string updatedTime = 5;
+}
+
+message DeleteResponse {
+  bool result = 1;
+}
+
+message CreateRequest {
+  int32 product_id = 1;
+  int32 price = 2;
+}
+
+message CreateResponse {
+  int32 id = 1;
+}
+
+message GetPriceResponse {
+  int32 price = 1;
+}
+
+service PriceService {
+  rpc getPriceHistory (GetPriceHistoryRequest) returns (stream PriceEntry);
+  rpc getPrice (GetPriceRequest) returns (GetPriceResponse);
+  rpc delete (DeleteRequest) returns (DeleteResponse);
+  rpc create (CreateRequest) returns (CreateResponse);
+}

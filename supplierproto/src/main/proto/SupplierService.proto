@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.khoi.supplierproto;
+
+option java_multiple_files = true;
+
+
+message GetSupplierListRequest {
+  int32 product_id = 1;
+}
+
+message SupplierEntry {
+  int32 id = 1;
+  string name = 2;
+  string address = 3;
+  string createdTime = 4;
+  string updatedTime = 5;
+}
+message GetSupplierNameByIdRequest {
+  int32 supplier_id = 1;
+}
+message GetSupplierNameByIdResponse {
+  string supplier_name = 1;
+}
+message DeleteSPRequest {
+  int32 product_id = 1;
+}
+message DeleteSPResponse {
+  int32 response = 1;
+}
+
+service SupplierService {
+  rpc getSupplierListByProductId (GetSupplierListRequest) returns (stream SupplierEntry);
+  rpc getSupplierNameById (GetSupplierNameByIdRequest) returns (GetSupplierNameByIdResponse);
+  rpc deleteSPByProductId (DeleteSPRequest) returns (DeleteSPResponse);
+}

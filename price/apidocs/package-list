@@ -1,0 +1,6 @@
+com.khoi.price
+com.khoi.price.dao
+com.khoi.price.dao.dao.impl
+com.khoi.price.dto
+com.khoi.price.service
+com.khoi.price.service.service.impl

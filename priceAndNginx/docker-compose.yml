@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  price:
+    build:
+      context: ./price
+      dockerfile: Dockerfile
+    network_mode: bridge
+    
+  proxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    network_mode: bridge
+    ports:
+      -  "8085:8080"
+    links:
+      -  price
+

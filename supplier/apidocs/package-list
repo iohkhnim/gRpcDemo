@@ -1,0 +1,7 @@
+com.khoi.supplier
+com.khoi.supplier.controller
+com.khoi.supplier.dao
+com.khoi.supplier.dao.dao.impl
+com.khoi.supplier.dto
+com.khoi.supplier.service
+com.khoi.supplier.service.service.impl
